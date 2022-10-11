@@ -1,0 +1,18 @@
+{
+	"name": "carousel-all",
+	"version": "7.7.0",
+	"author": "Yair",
+	"main": "server/api.js",
+	"license": "MIT",
+	"dependencies": {
+		"concurrently": "^6.0.0"
+	},
+	"scripts": {
+		"client": "npm start --prefix client",
+		"server": "npm run dev --prefix server",
+		"start_client_and_server": "concurrently \"npm run client\" \"npm run server\" "
+	},
+	"devDependencies": {
+		"prettier": "2.5.1"
+	}
+}
