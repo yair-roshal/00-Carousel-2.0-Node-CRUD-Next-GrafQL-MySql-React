@@ -13,6 +13,6 @@
 		"start_client_and_server": "concurrently \"npm run client\" \"npm run server\" "
 	},
 	"devDependencies": {
-		"prettier": "2.5.1"
+		"prettier": "2.7.1"
 	}
 }
