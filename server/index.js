@@ -66,7 +66,9 @@ const getAllWritersPromise = () => {
 			if (err) throw err
 			console.log(`connected as id ${connection.threadId}`)
 
-			pool.query('SELECT * from writers', (err, rows) => {
+			connection.query('SELECT * from writers', (err, rows) => {
+				connection.release()
+
 				if (!err) {
 					resolve(rows)
 				} else {
@@ -84,7 +86,9 @@ const getAllOneWriterPromise = id => {
 			if (err) throw err
 			console.log(`connected as id ${connection.threadId}`)
 
-			pool.query('SELECT * from writers WHERE id = ?', [id], (err, rows) => {
+			connection.query('SELECT * from writers WHERE id = ?', [id], (err, rows) => {
+				connection.release()
+
 				if (!err) {
 					resolve(rows)
 				} else {
