@@ -40,17 +40,17 @@ CREATE TABLE `writers` (
 -- Dumping data for table `writers`
 --
 
-INSERT INTO `writers` (`id`, `name`, `image`, `article1`, `article2`, `article3`) VALUES
-(1, 'שוקי פרידמן', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(2, 'קרולין גליק', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-3.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(3, 'ערן בר-טל', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-2.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(4, 'בועז ביסמוט', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-1.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(5, 'אמילי עמרוסי', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(7, 'שוקי פרידמן', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(8, 'קרולין גליק', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-3.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(9, 'ערן בר-טל', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-2.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(10, 'בועז ביסמוט', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-1.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
-(11, 'אמילי עמרוסי', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ');
+INSERT INTO `writers` (`id`, `name`, `image`, `article`) VALUES
+(1, 'שוקי פרידמן', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' ),
+(2, 'קרולין גליק', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-3.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' ),
+(3, 'ערן בר-טל', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-2.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '   ),
+(4, 'בועז ביסמוט', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-1.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' ),
+(5, 'אמילי עמרוסי', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '  ),
+(7, 'שוקי פרידמן', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' ),
+(8, 'קרולין גליק', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-3.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' ),
+(9, 'ערן בר-טל', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-2.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '   ),
+(10, 'בועז ביסמוט', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-1.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית '),
+(11, 'אמילי עמרוסי', 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b.png', 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ' );
 
 --
 -- Indexes for dumped tables
