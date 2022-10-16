@@ -115,7 +115,7 @@ const root = {
 			.then(function (rows) {
 				let rowsJSON = JSON.stringify(rows, null, 4)
 				console.log(`rowsJSON=== ${rowsJSON}`)
-				return rows
+				return rows[0]
 			})
 			.catch(err =>
 				setImmediate(() => {
