@@ -22,7 +22,7 @@ const writersConst = [
 		image: 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png',
 		article: 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ',
 	},
-];
+]
 
 // MySQL=============================================
 const pool = mysql.createPool({
@@ -60,42 +60,41 @@ const createWriter = input => {
 	}
 }
 
-const root = {
-
-		getAllWriters: () => {
-		  pool.getConnection((err, connection) => {
+getAllWritersInner: () => {
+	return new Promise((resolve, reject) => {
+		pool.getConnection((err, connection) => {
 			if (err) throw err
 			console.log(`connected as id ${connection.threadId}`)
 
-			  connection.query('SELECT * from writers', (err, rows) => {
-				connection.release()
-
+			pool.query('SELECT * from writers', (err, rows) => {
 				if (!err) {
 					// res.send(rows);
 					let rowsJSON = JSON.stringify(rows)
 					console.log(`rowsJSON=== ${rowsJSON}`)
-
-					writers =rows
-					// console.log(`rows=== ${rows}`)
-					// console.log(`writers=== ${writers}`)
-
-					// console.log(`writersConst=== ${writersConst}`)
-					// return writersConst
-					// return rows
+					// writers = rows
+					resolve(rows)
 				} else {
 					console.log(err)
+					return reject(err)
 				}
 			})
 		})
+	})
+}
 
-		// return rows;
-		// return writersConst;
-		console.log(`writers=== ${writers}`)
-
-		return writers;
+const root = {
+	getAllWriters: () => {
+		getAllWritersInner()
+			.then(function (rows) {
+				console.log(`writers=== ${rows}`)
+				return rows
+			})
+			.catch(err =>
+				setImmediate(() => {
+					throw err
+				}),
+			)
 	},
-
-
 
 	getWriter: ({ id }) => {
 		pool.getConnection((err, connection) => {
@@ -110,8 +109,7 @@ const root = {
 					let rowsJSON = JSON.stringify(rows)
 					console.log(`rowsJSON=== ${rowsJSON}`)
 					// return rows
- 					writer =rows
-
+					writer = rows
 				} else {
 					console.log(err)
 				}
@@ -139,20 +137,15 @@ app.use(
 
 app.listen(5000, () => console.log('server started on port 5000'))
 
-
-
-
 // query {
 // 	getAllWriters {
 // 		id, name, image, article
 // 	}
-// }    
+// }
 
- 
 // query {
 // getWriter(id:2) {
 // 		id, name
 // 	}
- 
-// }
 
+// }
