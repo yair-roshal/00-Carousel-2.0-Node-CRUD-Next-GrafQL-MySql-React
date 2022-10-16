@@ -1,4 +1,4 @@
-const {buildSchema} = require('graphql')
+const { buildSchema } = require('graphql')
 
 const schema = buildSchema(`
     
@@ -9,8 +9,7 @@ const schema = buildSchema(`
         article : String
 
      }
- 
-    
+  
     input WriterInput {
         id: ID
         name: String!
