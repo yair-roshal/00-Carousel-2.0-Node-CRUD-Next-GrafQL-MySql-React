@@ -1,8 +1,8 @@
 import React from 'react';
-import { AllWriters } from 'components';
-import { Header } from 'components';
-import { writers } from 'data';
-import { Loading } from 'components';
+import { AllWriters } from './AllWriters';
+import { Header } from './Header';
+import { writers } from '../data';
+import { Loading } from './Loading';
 
 export const PageOneComponent = () => {
 	if (!writers) {

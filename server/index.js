@@ -125,6 +125,8 @@ const root = {
 
 		// return writers.find(writer => writer.id == id);
 	},
+
+	
 	createWriter: ({ input }) => {
 		const writer = createWriter(input)
 		writers.push(writer)

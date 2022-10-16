@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { WriterItem } from 'components';
-import { userAgentMobile } from 'utils';
+import { WriterItem } from './WriterItem';
+import { userAgentMobile } from '../utils';
 
 export const AllWriters = ({ writers, isButtons }) => {
 	const SLIDE = 184;
