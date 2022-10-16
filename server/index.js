@@ -60,7 +60,7 @@ const createWriter = input => {
 	}
 }
 
-getAllWritersInner: () => {
+const getAllWritersPromise = () => {
 	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
 			if (err) throw err
@@ -68,10 +68,6 @@ getAllWritersInner: () => {
 
 			pool.query('SELECT * from writers', (err, rows) => {
 				if (!err) {
-					// res.send(rows);
-					let rowsJSON = JSON.stringify(rows)
-					console.log(`rowsJSON=== ${rowsJSON}`)
-					// writers = rows
 					resolve(rows)
 				} else {
 					console.log(err)
@@ -82,11 +78,29 @@ getAllWritersInner: () => {
 	})
 }
 
+const getAllOneWriterPromise = id => {
+	return new Promise((resolve, reject) => {
+		pool.getConnection((err, connection) => {
+			if (err) throw err
+			console.log(`connected as id ${connection.threadId}`)
+
+			pool.query('SELECT * from writers WHERE id = ?', [id], (err, rows) => {
+				if (!err) {
+					resolve(rows)
+				} else {
+					console.log(err)
+				}
+			})
+		})
+	})
+}
+
 const root = {
 	getAllWriters: () => {
-		getAllWritersInner()
+		return getAllWritersPromise()
 			.then(function (rows) {
-				console.log(`writers=== ${rows}`)
+				let rowsJSON = JSON.stringify(rows, null, 4)
+				console.log(`rowsJSON=== ${rowsJSON}`)
 				return rows
 			})
 			.catch(err =>
@@ -97,26 +111,18 @@ const root = {
 	},
 
 	getWriter: ({ id }) => {
-		pool.getConnection((err, connection) => {
-			if (err) throw err
-			console.log(`connected as id ${connection.threadId}`)
-
-			connection.query('SELECT * from writers WHERE id = ?', [id], (err, rows) => {
-				connection.release()
-
-				if (!err) {
-					// res.send(rows);
-					let rowsJSON = JSON.stringify(rows)
-					console.log(`rowsJSON=== ${rowsJSON}`)
-					// return rows
-					writer = rows
-				} else {
-					console.log(err)
-				}
+		return getAllOneWriterPromise(id)
+			.then(function (rows) {
+				let rowsJSON = JSON.stringify(rows, null, 4)
+				console.log(`rowsJSON=== ${rowsJSON}`)
+				return rows
 			})
-		})
+			.catch(err =>
+				setImmediate(() => {
+					throw err
+				}),
+			)
 
-		return writer
 		// return writers.find(writer => writer.id == id);
 	},
 	createWriter: ({ input }) => {
