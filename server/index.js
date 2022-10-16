@@ -80,6 +80,28 @@ const getAllWritersPromise = () => {
 	})
 }
 
+const createWriterPromise = () => {
+	return new Promise((resolve, reject) => {
+		pool.getConnection((err, connection) => {
+			if (err) throw err
+			console.log(`connected as id ${connection.threadId}`)
+
+			connection.query('INSERT INTO writers VALUES (DEFAULT, DEFAULT, DEFAULT);', (err, rows) => {
+				connection.release()
+
+				if (!err) {
+					resolve(rows)
+				} else {
+					console.log(err)
+					return reject(err)
+				}
+			})
+		})
+	})
+}
+
+
+
 const getAllOneWriterPromise = id => {
 	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
