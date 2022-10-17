@@ -1,33 +1,53 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import React from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useMutation, useQuery } from '@apollo/client'
+import { CREATE_WRITER } from '../../mutations/writer'
 
 export const AddWriter = () => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm();
+	} = useForm()
 
-	const onSubmit = data => {
+	const [newWriter] = useMutation(CREATE_WRITER)
+ 
+	// const onSubmit = data => {
 
-		axios
-			.post('http://localhost:5000/', data)
-			.then(res => {
-				if (res.status === 200) {
-					alert('Client successfully added');
-				} else Promise.reject();
-			})
-			.catch(err => alert('Something went wrong'));
-	};
+	// 	axios
+	// 		.post('http://localhost:5000/', data)
+	// 		.then(res => {
+	// 			if (res.status === 200) {
+	// 				alert('Client successfully added');
+	// 			} else Promise.reject();
+	// 		})
+	// 		.catch(err => alert('Something went wrong'));
+	// };
+
+	const addWriter = data => {
+		let id = 777;
+		console.log('data----', data);
+
+		newWriter({	variables: {
+			data: {
+				id, name, image,article			}
+		}}
+		
+		).then(({ data }) => {
+			console.log('data===', data)
+			// setWritername('')
+			// setAge(0)
+		})
+	}
 
 	return (
 		<>
 			<h1 className='titleTask'>Add item</h1>
 
 			<div className='formWrapper'>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form onSubmit={handleSubmit(addWriter)}>
 					<label htmlFor='name'>Name</label>
 					<input
 						name='name'
@@ -68,5 +88,5 @@ export const AddWriter = () => {
 				</Link>
 			</div>
 		</>
-	);
-};
+	)
+}

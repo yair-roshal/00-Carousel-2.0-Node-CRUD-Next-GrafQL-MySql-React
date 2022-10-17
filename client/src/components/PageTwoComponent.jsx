@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 
 import { useMutation, useQuery } from '@apollo/client'
 import { GET_ALL_WRITERS, GET_ONE_WRITER } from '../query/writer'
-import { CREATE_WRITER } from '../mutations/writer'
-
+import { CREATE_WRITER,DELETE_WRITER } from '../mutations/writer'
+ 
 export const PageTwoComponent = () => {
 	const { data, loading, error, refetch } = useQuery(GET_ALL_WRITERS)
 
@@ -17,12 +17,10 @@ export const PageTwoComponent = () => {
 	// 		id: 1,
 	// 	},
 	// })
-	// const [newWriter] = useMutation(CREATE_WRITER)
 	// const [name, setWriterName] = useState('')
 	// const [image, setImage] = useState(0)
  
-	// const URL = 'http://localhost:5000/'
-	const [writers, setWriters] = useState([])
+ 	const [writers, setWriters] = useState([])
  
 	// console.log(oneUser)
 
@@ -33,18 +31,7 @@ export const PageTwoComponent = () => {
 			setWriters(data.getAllWriters)
 		}
 	}, [data])
-
-	// useEffect(() => {
-	// 	axios
-	// 		.get(URL)
-	// 		.then(response => {
-	// 			setWriters(response.data)
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error)
-	// 		})
-	// }, [])
-
+ 
 	if (!writers) {
 		return <Loading />
 	}

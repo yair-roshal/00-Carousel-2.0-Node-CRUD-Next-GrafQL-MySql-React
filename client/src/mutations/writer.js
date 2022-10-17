@@ -7,3 +7,11 @@ export const CREATE_WRITER = gql`
         }
     }
 `
+
+export const DELETE_WRITER = gql`
+    mutation deleteWriter($id: ID) {
+        deleteWriter(id: $id) {
+            id, name, image,article
+        }
+    }
+`

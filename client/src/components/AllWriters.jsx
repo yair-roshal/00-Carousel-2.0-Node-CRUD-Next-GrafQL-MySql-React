@@ -3,7 +3,6 @@ import { WriterItem } from './WriterItem'
 import { userAgentMobile } from '../utils'
 
 export const AllWriters = ({ writers, isButtons }) => {
-	console.log('writers', writers)
 
 	const SLIDE = 184
 	const MARGIN = 9
