@@ -25,6 +25,7 @@ const schema = buildSchema(`
     }
     type Mutation {
         createWriter(input: WriterInput): Writer
+        updateWriter(input: WriterInput): Writer
         deleteWriter(id: ID): Writer
     }
 

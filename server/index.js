@@ -80,6 +80,33 @@ const createWriterPromise = input => {
 	})
 }
 
+const updateWriterPromise = input => {
+	return new Promise((resolve, reject) => {
+		pool.getConnection((err, connection) => {
+			if (err) throw err
+			console.log(`connected as id ${connection.threadId}`)
+			console.log(`input ${JSON.stringify(input, null, 4)}`)
+			connection.on('error', function (err) {
+				console.log('[mysql error]', err)
+			})
+
+			const sql = `UPDATE writers SET name=?,image=?,article=? WHERE id=?`
+			const data = [input.name, input.image, input.article, input.id]
+
+			connection.query(sql, data, (err, rows) => {
+				connection.release()
+
+				if (!err) {
+					resolve(rows)
+				} else {
+					console.log(err)
+					return reject(err)
+				}
+			})
+		})
+	})
+}
+
 const getOneWriterPromise = id => {
 	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
@@ -161,6 +188,18 @@ const root = {
 			)
 	},
 
+	updateWriter: ({ input }) => {
+		return updateWriterPromise(input)
+			.then(function (input) {
+				console.log(`input ${JSON.stringify(input, null, 4)}`)
+			})
+			.catch(err =>
+				setImmediate(() => {
+					throw err
+				}),
+			)
+	},
+
 	deleteWriter: ({ id }) => {
 		return deleteWriterPromise(id)
 			.then(function (id) {
@@ -202,4 +241,16 @@ app.listen(5000, () => console.log('server started on port 5000'))
 // 	createWriter(input: {id:33, name:"222", image:"2222",article:"222"}) {
 // 		id, name, image,article
 // 	}
+// }
+
+// mutation   {
+// 	deleteWriter(id:33) {
+// 		id, name, image,article
+// 	}
+// }
+
+// mutation   {
+// 	updateWriter(input: {id:33, name:"222", image:"2222",article:"222"}) {
+//    id, name, image,article
+// }
 // }
