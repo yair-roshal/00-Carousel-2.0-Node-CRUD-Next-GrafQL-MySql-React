@@ -2,21 +2,22 @@ import React from 'react'
 import { userAgentMobile } from '../utils'
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
-import axios from 'axios'
+import { DELETE_WRITER } from '../mutations/writer'
+import { useMutation } from '@apollo/client'
 
 export const WriterItem = ({ writer, isButtons }) => {
 	const { id, name, image, article } = writer
 
-	const deleteClient = () => {
-		axios
-			.delete('http://localhost:5000/' + id)
-			.then(res => {
-				if (res.status === 200) {
-					alert('Client successfully deleted')
-					window.location.reload()
-				} else Promise.reject()
-			})
-			.catch(err => alert('Something went wrong'))
+	const [deleteWriter] = useMutation(DELETE_WRITER)
+
+	const deleteWriterItem = () => {
+		deleteWriter({
+			variables: { id: id },
+		}).then(({ data }) => {
+			console.log('data===', data)
+			alert('Writer successfully deleted')
+			window.location.reload()
+		})
 	}
 
 	return (
@@ -44,7 +45,7 @@ export const WriterItem = ({ writer, isButtons }) => {
 
 			{isButtons && (
 				<div className='wrapperStaticButtons'>
-					<Button onClick={deleteClient} color='error' variant='contained'>
+					<Button onClick={deleteWriterItem} color='error' variant='contained'>
 						Delete
 					</Button>
 

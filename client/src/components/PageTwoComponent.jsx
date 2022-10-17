@@ -6,24 +6,11 @@ import { Header } from './Header'
 import { Link } from 'react-router-dom'
 
 import { useMutation, useQuery } from '@apollo/client'
-import { GET_ALL_WRITERS, GET_ONE_WRITER } from '../query/writer'
-import { CREATE_WRITER,DELETE_WRITER } from '../mutations/writer'
- 
+import { GET_ALL_WRITERS } from '../query/writer'
+
 export const PageTwoComponent = () => {
-	const { data, loading, error, refetch } = useQuery(GET_ALL_WRITERS)
-
-	// const { data: oneWriter, loading: loadingOneWriter } = useQuery(GET_ONE_WRITER, {
-	// 	variables: {
-	// 		id: 1,
-	// 	},
-	// })
-	// const [name, setWriterName] = useState('')
-	// const [image, setImage] = useState(0)
- 
- 	const [writers, setWriters] = useState([])
- 
-	// console.log(oneUser)
-
+	const { data, loading } = useQuery(GET_ALL_WRITERS)
+	const [writers, setWriters] = useState([])
 
 	useEffect(() => {
 		if (!loading) {
@@ -31,7 +18,7 @@ export const PageTwoComponent = () => {
 			setWriters(data.getAllWriters)
 		}
 	}, [data])
- 
+
 	if (!writers) {
 		return <Loading />
 	}

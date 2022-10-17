@@ -12,7 +12,7 @@ export const AddWriter = () => {
 		handleSubmit,
 	} = useForm()
 
-	const { data, loading, error, refetch } = useQuery(GET_ALL_WRITERS)
+	const { data, loading } = useQuery(GET_ALL_WRITERS)
 	const [writers, setWriters] = useState([])
 
 	useEffect(() => {
@@ -34,14 +34,14 @@ export const AddWriter = () => {
 				maxId = +writers[index].id
 			}
 		}
- 		let id = maxId + 1
+		let id = maxId + 1
 
 		const { name, image, article } = data
 
 		createWriter({
 			variables: { input: { id, name, image, article } },
 		}).then(({ data }) => {
-			console.log('data===', data) 
+			console.log('data===', data)
 		})
 	}
 

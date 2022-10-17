@@ -7,23 +7,6 @@ const mysql = require('mysql')
 const app = express()
 app.use(cors())
 
-let writers = []
-
-const writersConst = [
-	{
-		id: 1,
-		name: 'Vasya',
-		image: 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png',
-		article: 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ',
-	},
-	{
-		id: 2,
-		name: 'Vasya222',
-		image: 'https://raw.githubusercontent.com/yair-roshal/Carousel-Node-CRUD-MySql-React/master/client/src/images/15688150479892_b-4.png',
-		article: 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית ',
-	},
-]
-
 // MySQL=============================================
 const pool = mysql.createPool({
 	connectionLimit: 10,
@@ -58,7 +41,6 @@ const createWriterPromise = input => {
 		pool.getConnection((err, connection) => {
 			if (err) throw err
 			console.log(`connected as id ${connection.threadId}`)
-			// console.log(`input ${JSON.stringify(input, null, 4)}`)
 			connection.on('error', function (err) {
 				console.log('[mysql error]', err)
 			})
@@ -189,7 +171,6 @@ const root = {
 			)
 	},
 
-	
 	updateWriter: ({ input }) => {
 		return updateWriterPromise(input)
 			.then(function (input) {
@@ -205,7 +186,7 @@ const root = {
 	deleteWriter: ({ id }) => {
 		return deleteWriterPromise(id)
 			.then(function (id) {
-				console.log(`deleteWriterID=== ${id}`)
+				console.log(`deleteWriterID=== ${JSON.stringify(id, null, 4)}`)
 			})
 			.catch(err =>
 				setImmediate(() => {
