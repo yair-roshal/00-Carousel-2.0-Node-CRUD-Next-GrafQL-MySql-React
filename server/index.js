@@ -179,7 +179,8 @@ const root = {
 	createWriter: ({ input }) => {
 		return createWriterPromise(input)
 			.then(function (input) {
-				console.log(`rowsJSON=== ${input}`)
+				let rowsJSON = JSON.stringify(input, null, 4)
+				console.log(`rowsJSON=== ${rowsJSON}`)
 			})
 			.catch(err =>
 				setImmediate(() => {
@@ -188,6 +189,7 @@ const root = {
 			)
 	},
 
+	
 	updateWriter: ({ input }) => {
 		return updateWriterPromise(input)
 			.then(function (input) {

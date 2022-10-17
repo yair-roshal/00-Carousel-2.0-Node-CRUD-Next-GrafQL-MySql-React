@@ -12,8 +12,15 @@ export const AddWriter = () => {
 		handleSubmit,
 	} = useForm()
 
-	const [newWriter] = useMutation(CREATE_WRITER)
- 
+	// const [newWriter] = useMutation(CREATE_WRITER)
+	const [createWriter] = useMutation(CREATE_WRITER, {
+		// onCompleted: () => history.push('/'),
+
+		variables: { id: 33, name: '222', image: '2222', article: '222' },
+	})
+
+	// const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
+
 	// const onSubmit = data => {
 
 	// 	axios
@@ -26,16 +33,16 @@ export const AddWriter = () => {
 	// 		.catch(err => alert('Something went wrong'));
 	// };
 
-	const addWriter = data => {
-		let id = 777;
-		console.log('data----', data);
+	const onSubmitAddWriter = data => {
+		let id = 777
+		console.log('data----', data)
+		const { name, image, article } = data
+		console.log('name---', name)
 
-		newWriter({	variables: {
-			data: {
-				id, name, image,article			}
-		}}
-		
-		).then(({ data }) => {
+		createWriter({
+			variables: { input: { id, name, image, article } },
+			// variables: { input: { id: 723, name: '222', image: '2222', article: '222' } },
+		}).then(({ data }) => {
 			console.log('data===', data)
 			// setWritername('')
 			// setAge(0)
@@ -47,7 +54,7 @@ export const AddWriter = () => {
 			<h1 className='titleTask'>Add item</h1>
 
 			<div className='formWrapper'>
-				<form onSubmit={handleSubmit(addWriter)}>
+				<form onSubmit={handleSubmit(onSubmitAddWriter)}>
 					<label htmlFor='name'>Name</label>
 					<input
 						name='name'
