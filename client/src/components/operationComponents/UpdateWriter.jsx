@@ -1,46 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_ONE_WRITER } from '../../query/writer'
+import { UPDATE_WRITER } from '../../mutations/writer'
 
 export const UpdateWriter = props => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm();
-	const [formValues, setFormValues] = useState();
+	} = useForm()
+
+	const { data, loading } = useQuery(GET_ONE_WRITER, {
+		variables: { id: props.match.params.id },
+	})
+
+	const [writer, setWriter] = useState([])
 
 	useEffect(() => {
-		axios
-			.get(`http://localhost:5000/${props.match.params.id}`)
-			.then(response => {
-				setFormValues(...response.data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	}, []);
+		if (!loading) {
+			setWriter(data.getWriter)
+		}
+	}, [data])
 
-	const onSubmit = clientObject => {
-		axios
-			.put('http://localhost:5000/' + props.match.params.id, clientObject)
-			.then(res => {
-				if (res.status === 200) {
-					alert('Client successfully updated');
-					props.history.push('/UpdateWriter/' + props.match.params.id);
-				} else Promise.reject();
-			})
-			.catch(err => alert('Something went wrong'));
-	};
+	const [updateWriter] = useMutation(UPDATE_WRITER)
+
+	const updateWriterItem = clientObject => {
+		console.log('clientObject :>> ', clientObject)
+		let { id, name, image, article } = clientObject
+		updateWriter({
+			variables: { input: { id, name, image, article } },
+		}).then(({ data }) => {
+			console.log('data===', data)
+			alert('Writer successfully updated')
+			// window.location.reload()
+		})
+	}
 
 	return (
 		<>
-			{formValues && (
+			{writer && (
 				<div>
 					<div className='titleTask'>Update Writer</div>
 					<div className='formWrapper'>
-						<form onSubmit={handleSubmit(onSubmit)}>
+						<form onSubmit={handleSubmit(updateWriterItem)}>
 							<input
 								style={{ display: 'none' }}
 								defaultValue={props.match.params.id}
@@ -51,7 +55,7 @@ export const UpdateWriter = props => {
 							/>
 							<label htmlFor='name'>Name</label>
 							<input
-								defaultValue={formValues.name}
+								defaultValue={writer.name}
 								type='text'
 								placeholder='Name'
 								{...register('name', {
@@ -66,7 +70,7 @@ export const UpdateWriter = props => {
 
 							<input
 								type='text'
-								defaultValue={formValues.image}
+								defaultValue={writer.image}
 								placeholder='Photo url'
 								{...register('image', {
 									required: true,
@@ -85,7 +89,7 @@ export const UpdateWriter = props => {
 							<label htmlFor='article'>Additional text</label>
 
 							<textarea
-								defaultValue={formValues.article1}
+								defaultValue={writer.article}
 								type='text'
 								placeholder='Additional text'
 								{...register('article')}
@@ -104,5 +108,5 @@ export const UpdateWriter = props => {
 				</div>
 			)}
 		</>
-	);
-};
+	)
+}
