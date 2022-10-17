@@ -1,9 +1,9 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQuery } from '@apollo/client'
 import { CREATE_WRITER } from '../../mutations/writer'
+import { GET_ALL_WRITERS } from '../../query/writer'
 
 export const AddWriter = () => {
 	const {
@@ -12,40 +12,36 @@ export const AddWriter = () => {
 		handleSubmit,
 	} = useForm()
 
-	// const [newWriter] = useMutation(CREATE_WRITER)
-	const [createWriter] = useMutation(CREATE_WRITER, {
-		// onCompleted: () => history.push('/'),
+	const { data, loading, error, refetch } = useQuery(GET_ALL_WRITERS)
+	const [writers, setWriters] = useState([])
 
-		variables: { id: 33, name: '222', image: '2222', article: '222' },
-	})
+	useEffect(() => {
+		if (!loading) {
+			console.log('data.getAllWriters', data.getAllWriters)
+			setWriters(data.getAllWriters)
+		}
+	}, [data])
 
-	// const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
-
-	// const onSubmit = data => {
-
-	// 	axios
-	// 		.post('http://localhost:5000/', data)
-	// 		.then(res => {
-	// 			if (res.status === 200) {
-	// 				alert('Client successfully added');
-	// 			} else Promise.reject();
-	// 		})
-	// 		.catch(err => alert('Something went wrong'));
-	// };
+	const [createWriter] = useMutation(CREATE_WRITER)
 
 	const onSubmitAddWriter = data => {
-		let id = 777
-		console.log('data----', data)
+		let maxId = 0
+		for (let index in writers) {
+			console.log('index :>> ', index)
+			console.log('writers[index].id :>> ', writers[index].id)
+
+			if (+writers[index].id > maxId) {
+				maxId = +writers[index].id
+			}
+		}
+ 		let id = maxId + 1
+
 		const { name, image, article } = data
-		console.log('name---', name)
 
 		createWriter({
 			variables: { input: { id, name, image, article } },
-			// variables: { input: { id: 723, name: '222', image: '2222', article: '222' } },
 		}).then(({ data }) => {
-			console.log('data===', data)
-			// setWritername('')
-			// setAge(0)
+			console.log('data===', data) 
 		})
 	}
 
