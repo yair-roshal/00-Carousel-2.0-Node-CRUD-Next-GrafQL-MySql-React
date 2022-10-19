@@ -5,6 +5,7 @@ const schema = require('./schema')
 const mysql = require('mysql')
 
 const app = express()
+const port = 5000
 app.use(cors())
 
 // MySQL=============================================
@@ -205,7 +206,7 @@ app.use(
 	}),
 )
 
-app.listen(5000, () => console.log('server started on port 5000'))
+app.listen(port, () => console.log(`server started on port ${port}`))
 
 // query {
 // 	getAllWriters {
