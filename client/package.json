@@ -23,7 +23,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "react-scripts --openssl-legacy-provider start"
+        "start-openssl": "react-scripts --openssl-legacy-provider start",
+        "start": "react-scripts start"
     },
     "browserslist": {
         "production": [
