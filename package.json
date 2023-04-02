@@ -5,6 +5,7 @@
 	"main": "server/api.js",
 	"license": "MIT",
 	"dependencies": {
+		"caniuse-lite": "^1.0.30001473",
 		"concurrently": "^6.0.0"
 	},
 	"scripts": {
