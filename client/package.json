@@ -21,8 +21,6 @@
         "graphql": "^15.5.0"
     },
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
         "start-openssl": "react-scripts --openssl-legacy-provider start",
         "start": "react-scripts start"
     },
